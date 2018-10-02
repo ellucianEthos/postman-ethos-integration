@@ -1,0 +1,711 @@
+{
+	"info": {
+		"_postman_id": "e212a932-8f32-4b02-98c6-66c1d0a21699",
+		"name": "Ethos Integration Examples",
+		"description": "This collection includes examples of how to make some of the most common API calls through Ethos Integration.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Some Basics",
+			"item": [
+				{
+					"name": "Use API Key to get Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var newToken = responseBody;",
+									"postman.setEnvironmentVariable(\"Access Token\", newToken);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{API Key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/auth",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"auth"
+							]
+						},
+						"description": "All applications must make this request.\n\nApplications must call the /auth endpoint with their API Key and be issued an Access Token by Ethos Integration. The Access Token (in jwt format) is then used to invoke all other Ethos Integration APIs."
+					},
+					"response": []
+				},
+				{
+					"name": "Read all courses resource",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/courses",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"courses"
+							]
+						},
+						"description": "This API request is a GET to return a collection of courses resources. \n\nThe authoritative system may return a collection that contains all of the courses available or, if the dataset is large, a page. Included in the response headers will be information indicating how many total courses exist in the authoritative system and how many were returned in this response."
+					},
+					"response": []
+				},
+				{
+					"name": "Read all email-types resource",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/email-types",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"email-types"
+							]
+						},
+						"description": "This API request is a GET to return a collection of email-types resources. \n\nThe authoritative system may return a collection that contains all of the email-types available or, if the dataset is large, a page. Included in the response headers will be information indicating how many total email-types exist in the authoritative system and how many were returned in this response."
+					},
+					"response": []
+				},
+				{
+					"name": "Read all persons resource",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/persons",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons"
+							]
+						},
+						"description": "This API request is a GET to return a collection of persons resources. \n\nThe authoritative system may return a collection that contains all of the courses available or, if the dataset is large, a page. Included in the response headers will be information indicating how many total persons exist in the authoritative system and how many were returned in this response."
+					},
+					"response": []
+				},
+				{
+					"name": "Update a persons resource",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.hedtech.integration.v8+json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/vnd.hedtech.integration.v8+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"privacyStatus\": {\n            \"privacyCategory\": \"unrestricted\"\n        },\n        \"names\": [\n            {\n                \"type\": {\n                    \"category\": \"legal\",\n                    \"detail\": {\n                        \"id\": \"5e59d3e4-61a8-4f61-9a18-05ae62a5b003\"\n                    }\n                },\n                \"fullName\": \"Mr. James Smith\",\n                \"title\": \"Mr.\",\n                \"firstName\": \"James\",\n                \"lastName\": \"Smith\",\n                \"preference\": \"preferred\"\n            }\n        ],\n        \"dateOfBirth\": \"1994-12-07\",\n        \"gender\": \"male\",\n        \"roles\": [\n            {\n                \"role\": \"student\"\n            }\n        ],\n        \"credentials\": [\n            {\n                \"type\": \"colleaguePersonId\",\n                \"value\": \"0000255\"\n            },\n            {\n                \"type\": \"ssn\",\n                \"value\": \"135-79-2468\"\n            }\n        ],\n        \"addresses\": [\n            {\n                \"address\": {\n                    \"id\": \"1cd57963-6f6b-4df0-b8eb-dec4a0a72e58\"\n                },\n                \"type\": {\n                    \"addressType\": \"home\",\n                    \"detail\": {\n                        \"id\": \"c70b16d2-be85-4d43-a4b6-c13941c50d6e\"\n                    }\n                },\n                \"startOn\": \"2001-10-08T00:00:00\",\n                \"preference\": \"primary\"\n            }\n        ],\n        \"metadata\": {},\n        \"id\": \"e17f9afb-ad01-4727-bd98-6664258decb0\"\n    }"
+						},
+						"url": {
+							"raw": "https://integrateapi.elluciancloud.com/api/persons/e17f9afb-ad01-4727-bd98-6664258decb0",
+							"protocol": "https",
+							"host": [
+								"integrateapi",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons",
+								"e17f9afb-ad01-4727-bd98-6664258decb0"
+							]
+						},
+						"description": "This request updates an existing persons resource.\n\nNote that the headers indicate what EEDM version of the resource is included in the message."
+					},
+					"response": []
+				},
+				{
+					"name": "Create a persons resource",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.hedtech.integration.v8+json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/vnd.hedtech.integration.v8+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"privacyStatus\": {\n            \"privacyCategory\": \"unrestricted\"\n        },\n        \"names\": [\n            {\n                \"type\": {\n                    \"category\": \"legal\",\n                    \"detail\": {\n                        \"id\": \"5e59d3e4-61a8-4f61-9a18-05ae62a5b003\"\n                    }\n                },\n                \"fullName\": \"Mr. Alex Green\",\n                \"title\": \"Mr.\",\n                \"firstName\": \"Alex\",\n                \"lastName\": \"Green\",\n                \"preference\": \"preferred\"\n            },\n            {\n                \"type\": {\n                    \"category\": \"personal\",\n                    \"detail\": {\n                        \"id\": \"6bf52ca3-3382-4f8e-9ae5-15b0b79f9c79\"\n                    }\n                },\n                \"fullName\": \"Alexander Green\",\n                \"firstName\": \"Alexander\",\n                \"lastName\": \"Green\"\n            }\n        ],\n        \"dateOfBirth\": \"1988-09-23\",\n        \"gender\": \"male\",\n        \"maritalStatus\": {\n            \"maritalCategory\": \"single\",\n            \"detail\": {\n                \"id\": \"332b98d6-9e6a-4313-80b4-ee5548d735aa\"\n            }\n        },\n        \"citizenshipCountry\": \"USA\",\n        \"metadata\": {},\n        \"id\": \"4804cf37-c9d3-4658-9620-74db36e48221\"\n    }"
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/persons",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve change-notifications (subscriptions)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/consume",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"consume"
+							]
+						},
+						"description": "This request reads from the client's change-notification queue.\n\nThe Ethos Integration subscriber API will return a collection of change-notifications. "
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Next Steps",
+			"item": [
+				{
+					"name": "GET  Single Persons version-less",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\n        \"privacyStatus\": {\n            \"privacyCategory\": \"restricted\",\n            \"detail\": {\n                \"id\": \"0b21991d-f747-4859-9266-a8f3a6796925\"\n            }\n        },\n        \"names\": [\n            {\n                \"type\": {\n                    \"category\": \"legal\",\n                    \"detail\": {\n                        \"id\": \"704166d7-5f83-4b8c-b312-ba93ffb5e2ba\"\n                    }\n                },\n                \"fullName\": \"Elvin K. Lefflero\",\n                \"firstName\": \"Elvin\",\n                \"middleName\": \"K\",\n                \"lastName\": \"Lefflero\",\n                \"preference\": \"preferred\"\n            }\n        ],\n        \"citizenshipStatus\": {\n            \"category\": \"nonCitizen\",\n            \"detail\": {\n                \"id\": \"442df970-e5d7-443e-bfbb-4386bf46143f\"\n            }\n        },\n        \"roles\": [\n            {\n                \"role\": \"vendor\"\n            },\n            {\n                \"role\": \"student\"\n            }\n        ],\n        \"credentials\": [\n            {\n                \"type\": \"colleaguePersonId\",\n                \"value\": \"0000002\"\n            },\n            {\n                \"type\": \"colleagueUserName\",\n                \"value\": \"datatel\"\n            }\n        ],\n        \"metadata\": {},\n        \"id\": \"f657b0e2-4c12-48f5-a6b3-24ea7eed44bd\"\n    },"
+						},
+						"url": {
+							"raw": "https://integrateapi.elluciancloud.com/api/persons/f657b0e2-4c12-48f5-a6b3-24ea7eed44bd",
+							"protocol": "https",
+							"host": [
+								"integrateapi",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons",
+								"f657b0e2-4c12-48f5-a6b3-24ea7eed44bd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  Single Persons version-specific",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/vnd.hedtech.integration.v8+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\n        \"privacyStatus\": {\n            \"privacyCategory\": \"restricted\",\n            \"detail\": {\n                \"id\": \"0b21991d-f747-4859-9266-a8f3a6796925\"\n            }\n        },\n        \"names\": [\n            {\n                \"type\": {\n                    \"category\": \"legal\",\n                    \"detail\": {\n                        \"id\": \"704166d7-5f83-4b8c-b312-ba93ffb5e2ba\"\n                    }\n                },\n                \"fullName\": \"Elvin K. Lefflero\",\n                \"firstName\": \"Elvin\",\n                \"middleName\": \"K\",\n                \"lastName\": \"Lefflero\",\n                \"preference\": \"preferred\"\n            }\n        ],\n        \"citizenshipStatus\": {\n            \"category\": \"nonCitizen\",\n            \"detail\": {\n                \"id\": \"442df970-e5d7-443e-bfbb-4386bf46143f\"\n            }\n        },\n        \"roles\": [\n            {\n                \"role\": \"vendor\"\n            },\n            {\n                \"role\": \"student\"\n            }\n        ],\n        \"credentials\": [\n            {\n                \"type\": \"colleaguePersonId\",\n                \"value\": \"0000002\"\n            },\n            {\n                \"type\": \"colleagueUserName\",\n                \"value\": \"datatel\"\n            }\n        ],\n        \"metadata\": {},\n        \"id\": \"f657b0e2-4c12-48f5-a6b3-24ea7eed44bd\"\n    },"
+						},
+						"url": {
+							"raw": "https://integrateapi.elluciancloud.com/api/persons/35b16136-bafd-4b5d-9dd2-995ad9f4ba00",
+							"protocol": "https",
+							"host": [
+								"integrateapi",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons",
+								"35b16136-bafd-4b5d-9dd2-995ad9f4ba00"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read persons filter on credential",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/persons?criteria={\"credential\":{\"type\":\"colleaguePersonId\",\"value\":\"0000219\"}}",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "{\"credential\":{\"type\":\"colleaguePersonId\",\"value\":\"0000219\"}}"
+								}
+							]
+						},
+						"description": "This API request is a GET to return a persons resource based on filtering for a specific credential."
+					},
+					"response": []
+				},
+				{
+					"name": "Read courses filter on title",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/courses?criteria={\"title\":\"Introduction to Psychology\"}",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"courses"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "{\"title\":\"Introduction to Psychology\"}"
+								}
+							]
+						},
+						"description": "This API request is a GET to return a collection of courses that match a value of the data model property \"title\".\n\nThe authoritative system may return a collection that contains all of the courses that match the filter or, if the dataset is large, a page. Included in the response headers will be information indicating how many total courses exist in the authoritative system and how many were returned in this response."
+					},
+					"response": []
+				},
+				{
+					"name": "Read courses filter by subject",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/courses?criteria={\"subject\":\"cc8fcbae-85d3-4acd-bf5d-e8d92f49e717\"}",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"courses"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "{\"subject\":\"cc8fcbae-85d3-4acd-bf5d-e8d92f49e717\"}"
+								}
+							]
+						},
+						"description": "This API request is a GET to return a collection of courses resources by a given subject (subject guid). \n\nThe authoritative system may return a collection that contains all of the courses available or, if the dataset is large, a page. Included in the response headers will be information indicating how many total courses exist in the authoritative system and how many were returned in this response."
+					},
+					"response": []
+				},
+				{
+					"name": "Read all persons paging 1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/persons?offset=0&limit=100",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "This API request is a GET to return a collection of persons resources. \n\nIncluded as a query parameter is \"offset\", which is a 0-based indicator to the authoritative system to return a page of persons, beginning with the 1st record. The \"offset\" query parameter is important for paging through a large collection of data."
+					},
+					"response": []
+				},
+				{
+					"name": "Read all persons paging 2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/persons?offset=100&limit=100",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "100"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "This API request is a GET to return a collection of persons resources. \n\nIncluded as a query parameter is \"offset\", which is a 0-based indicator to the authoritative system to return a page of persons, beginning with the 101st record. The \"offset\" query parameter is important for paging through a large collection of data."
+					},
+					"response": []
+				},
+				{
+					"name": "Read all persons paging 3",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/persons?offset=200&limit=100",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "200"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "This API request is a GET to return a collection of persons resources. \n\nIncluded as a query parameter is \"offset\", which is a 0-based indicator to the authoritative system to return a page of persons, beginning with the 201st record. The \"offset\" query parameter is important for paging through a large collection of data."
+					},
+					"response": []
+				},
+				{
+					"name": "GET institution-jobs filter for person",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/institution-jobs?criteria={\"endOn\":\"2013-01-31\",\"person\":\"08bb7310-0da7-4a0f-b5cc-4fcc516d4d8a\"}",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"institution-jobs"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "{\"endOn\":\"2013-01-31\",\"person\":\"08bb7310-0da7-4a0f-b5cc-4fcc516d4d8a\"}"
+								}
+							]
+						},
+						"description": "This request reads the institution-jobs resource with a filter for a specific person (guid).\n\nThe API will return a collection of institution-jobs for the given person guid."
+					},
+					"response": []
+				},
+				{
+					"name": "GET sections filter for academic-period and course",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/sections?criteria={\"academicPeriod\":{\"id\":\"17920c56-7a4c-4f00-9a39-4801b7e6fc58\"},\"course\":{\"id\":\"b5f58254-4d30-4052-ac8b-6d20898e232b\"}}",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"sections"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "{\"academicPeriod\":{\"id\":\"17920c56-7a4c-4f00-9a39-4801b7e6fc58\"},\"course\":{\"id\":\"b5f58254-4d30-4052-ac8b-6d20898e232b\"}}"
+								}
+							]
+						},
+						"description": "This request returns a collection of sections given a specific academic-period (guid) and course (guid)."
+					},
+					"response": []
+				},
+				{
+					"name": "Read persons filter on person-filters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/persons?criteria={\"personFilter\":\"5305f3ee-a0a8-4893-9722-4c50ac9557a1\"}",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "{\"personFilter\":\"5305f3ee-a0a8-4893-9722-4c50ac9557a1\"}"
+								}
+							]
+						},
+						"description": "This API request is a GET to return a collection of persons resources. \n\nThis request is filtered based on a person-filters guid, which should be preconfigured in the Authoritative system.\n\nThe authoritative system may return a collection that contains all of the courses available or, if the dataset is large, a page. Included in the response headers will be information indicating how many total persons exist in the authoritative system and how many were returned in this response."
+					},
+					"response": []
+				},
+				{
+					"name": "Read persons filter on role",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/api/persons?criteria={\"roles\":[{\"role\":\"student\"}]}",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"api",
+								"persons"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "{\"roles\":[{\"role\":\"student\"}]}"
+								}
+							]
+						},
+						"description": "This API request is a GET to return a collection of persons resources. \n\nThis request filters all persons records, telling the API to return only persons who are or have been a student."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
