@@ -28,6 +28,19 @@ Finish the setup by selecting the environment from the dropdown menu so that Pos
 
 ![](/screenshots/postman5.png)
 
+## More Detail
+
+The general process for using Ethos Integration APIs is:
+* Use API Key to obtain JWT Access token
+* Use JWT Access Token to make API calls
+
+The JWT Access token expires after 5 minutes, so it is not necessary to obtain a new one *every* time an API call is made. If an expired JWT Access Token is used to make an API call the HTTP response will be **401 Unauthorized**.
+
+In this Postman *collection* and *environment* the API Key and JWT Access Token are stored in environment variables and the API requests will use them. If you examine the API call "Use API Key to get Access Token" you will see that Postman uses the API Key stored in the environment variable and then stores the result the "Access Token" environment variable.
+
+![](/screenshots/postman6.png)
+
+Subsequent API calls will then use the value stored in "Access Token" for authorization. If an API call returns a **401 Unauthorized** simply click on the "Use API Key to get Access Token" request again to obtain a new JWT Access Token.
 
 
 This document was written using Postman v6.3.0.
