@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e212a932-8f32-4b02-98c6-66c1d0a21699",
+		"_postman_id": "8147af94-3a80-46e0-bf02-1b01f84914d0",
 		"name": "Ethos Integration Examples",
 		"description": "This collection includes examples of how to make some of the most common API calls through Ethos Integration.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -223,6 +223,96 @@
 					"response": []
 				},
 				{
+					"name": "Publish single change-notification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c166c875-957b-4e68-9334-851b8871edbe",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.hedtech.change-notifications.v2+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"resource\": {\n\t\t\"name\": \"buildings\",\n\t\t\"id\": \"fee12eb6-dae1-456b-a7c4-063458617478\",\n\t\t\"version\": \"application/vnd.hedtech.integration.v6+json\"\n\t},\n\t\"operation\": \"replaced\",\n\t\"contentType\": \"resource-representation\",\n\t\"content\": {\n\t\t\"code\": \"BLD1\",\n\t\t\"title\": \"Building 1\",\n\t\t\"description\": \"the first building\",\n\t\t\"id\": \"fee12eb6-dae1-456b-a7c4-063458617478\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/publish",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"publish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish array of change-notifications",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c166c875-957b-4e68-9334-851b8871edbe",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.hedtech.change-notifications.v2+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"resource\": {\n\t\t\t\"name\": \"buildings\",\n\t\t\t\"id\": \"fee12eb6-dae1-456b-a7c4-063458617478\",\n\t\t\t\"version\": \"application/vnd.hedtech.integration.v6+json\"\n\t\t},\n\t\t\"operation\": \"replaced\",\n\t\t\"contentType\": \"resource-representation\",\n\t\t\"content\": {\n\t\t\t\"code\": \"BLD1\",\n\t\t\t\"title\": \"Building 1\",\n\t\t\t\"description\": \"the first building\",\n\t\t\t\"id\": \"fee12eb6-dae1-456b-a7c4-063458617478\"\n\t\t}\n\t},\n\t{\n\t\t\"resource\": {\n\t\t\t\"name\": \"buildings\",\n\t\t\t\"id\": \"9d7c0f72-9eb4-4b76-83f1-e4a6a5fcab69\",\n\t\t\t\"version\": \"application/vnd.hedtech.integration.v6+json\"\n\t\t},\n\t\t\"operation\": \"replaced\",\n\t\t\"contentType\": \"resource-representation\",\n\t\t\"content\": {\n\t\t\t\"code\": \"BLD2\",\n\t\t\t\"title\": \"Building 2\",\n\t\t\t\"description\": \"the second building\",\n\t\t\t\"id\": \"9d7c0f72-9eb4-4b76-83f1-e4a6a5fcab69\"\n\t\t}\n\t}\n]"
+						},
+						"url": {
+							"raw": "https://integrate.elluciancloud.com/publish",
+							"protocol": "https",
+							"host": [
+								"integrate",
+								"elluciancloud",
+								"com"
+							],
+							"path": [
+								"publish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Retrieve change-notifications (subscriptions)",
 					"request": {
 						"method": "GET",
@@ -269,7 +359,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "   {\n        \"privacyStatus\": {\n            \"privacyCategory\": \"restricted\",\n            \"detail\": {\n                \"id\": \"0b21991d-f747-4859-9266-a8f3a6796925\"\n            }\n        },\n        \"names\": [\n            {\n                \"type\": {\n                    \"category\": \"legal\",\n                    \"detail\": {\n                        \"id\": \"704166d7-5f83-4b8c-b312-ba93ffb5e2ba\"\n                    }\n                },\n                \"fullName\": \"Elvin K. Lefflero\",\n                \"firstName\": \"Elvin\",\n                \"middleName\": \"K\",\n                \"lastName\": \"Lefflero\",\n                \"preference\": \"preferred\"\n            }\n        ],\n        \"citizenshipStatus\": {\n            \"category\": \"nonCitizen\",\n            \"detail\": {\n                \"id\": \"442df970-e5d7-443e-bfbb-4386bf46143f\"\n            }\n        },\n        \"roles\": [\n            {\n                \"role\": \"vendor\"\n            },\n            {\n                \"role\": \"student\"\n            }\n        ],\n        \"credentials\": [\n            {\n                \"type\": \"colleaguePersonId\",\n                \"value\": \"0000002\"\n            },\n            {\n                \"type\": \"colleagueUserName\",\n                \"value\": \"datatel\"\n            }\n        ],\n        \"metadata\": {},\n        \"id\": \"f657b0e2-4c12-48f5-a6b3-24ea7eed44bd\"\n    },"
+							"raw": ""
 						},
 						"url": {
 							"raw": "https://integrateapi.elluciancloud.com/api/persons/f657b0e2-4c12-48f5-a6b3-24ea7eed44bd",
@@ -304,7 +394,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "   {\n        \"privacyStatus\": {\n            \"privacyCategory\": \"restricted\",\n            \"detail\": {\n                \"id\": \"0b21991d-f747-4859-9266-a8f3a6796925\"\n            }\n        },\n        \"names\": [\n            {\n                \"type\": {\n                    \"category\": \"legal\",\n                    \"detail\": {\n                        \"id\": \"704166d7-5f83-4b8c-b312-ba93ffb5e2ba\"\n                    }\n                },\n                \"fullName\": \"Elvin K. Lefflero\",\n                \"firstName\": \"Elvin\",\n                \"middleName\": \"K\",\n                \"lastName\": \"Lefflero\",\n                \"preference\": \"preferred\"\n            }\n        ],\n        \"citizenshipStatus\": {\n            \"category\": \"nonCitizen\",\n            \"detail\": {\n                \"id\": \"442df970-e5d7-443e-bfbb-4386bf46143f\"\n            }\n        },\n        \"roles\": [\n            {\n                \"role\": \"vendor\"\n            },\n            {\n                \"role\": \"student\"\n            }\n        ],\n        \"credentials\": [\n            {\n                \"type\": \"colleaguePersonId\",\n                \"value\": \"0000002\"\n            },\n            {\n                \"type\": \"colleagueUserName\",\n                \"value\": \"datatel\"\n            }\n        ],\n        \"metadata\": {},\n        \"id\": \"f657b0e2-4c12-48f5-a6b3-24ea7eed44bd\"\n    },"
+							"raw": ""
 						},
 						"url": {
 							"raw": "https://integrateapi.elluciancloud.com/api/persons/35b16136-bafd-4b5d-9dd2-995ad9f4ba00",
